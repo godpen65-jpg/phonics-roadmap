@@ -458,6 +458,16 @@
     padding: 0 12px;
     text-wrap: balance;
   }
+  .version-tag {
+    position: relative; z-index: 1;
+    text-align: center;
+    color: var(--ink-soft);
+    opacity: 0.6;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+  }
 
   @media (max-width: 480px) {
     .hero { padding-top: 40px; }
@@ -759,6 +769,7 @@
   </main>
 
   <footer class="foot">받침 없는 세 글자 단어부터 연습하면 자신감이 쑥쑥 자라요.</footer>
+<p class="version-tag">v1.1 · 2026-07-25</p>
 </div>
 
 <script>
@@ -995,3 +1006,82 @@
   }
 })();
 </script>
+<!--HELP_MODAL_START-->
+<style>
+.hlp-btn{position:fixed;right:14px;bottom:14px;z-index:99998;
+  font-family:'Jua','Gaegu',system-ui,sans-serif;font-size:16px;
+  background:#f4869f;color:#fff;border:none;border-radius:999px;
+  padding:12px 18px;box-shadow:0 6px 18px rgba(232,105,143,.45);cursor:pointer}
+.hlp-btn:hover{background:#e8698f}
+.hlp-ov{position:fixed;inset:0;z-index:99999;background:rgba(60,40,55,.55);
+  display:none;align-items:center;justify-content:center;padding:16px}
+.hlp-ov.on{display:flex}
+.hlp-box{background:#fff;border-radius:22px;max-width:560px;width:100%;
+  max-height:86vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:24px 22px 30px;position:relative;
+  font-family:'Gaegu',system-ui,sans-serif;color:#4a3f55;
+  box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:left}
+.hlp-x{position:sticky;top:0;float:right;background:#ffe1ec;color:#e14b7a;
+  border:none;border-radius:999px;width:38px;height:38px;font-size:20px;cursor:pointer;
+  line-height:1;font-weight:700}
+.hlp-box h2{font-family:'Jua','Gaegu',sans-serif;font-size:25px;color:#e14b7a;
+  margin:0 0 6px;line-height:1.35}
+.hlp-box h3{font-family:'Jua','Gaegu',sans-serif;font-size:20px;color:#3f3550;
+  margin:22px 0 8px;padding-top:14px;border-top:2px dashed #ffe1ec;line-height:1.4}
+.hlp-box h3:first-of-type{border-top:none;padding-top:0;margin-top:14px}
+.hlp-box p{font-size:18px;line-height:1.65;margin:6px 0}
+.hlp-box ul{margin:6px 0 6px 4px;padding-left:20px}
+.hlp-box li{font-size:18px;line-height:1.65;margin-bottom:5px}
+.hlp-box b{color:#e14b7a}
+.hlp-tip{background:#fff6fa;border:2px solid #ffe1ec;border-radius:14px;
+  padding:12px 14px;margin-top:10px;font-size:17px;line-height:1.6}
+.hlp-lead{font-size:18px;color:#7a6f85;margin-bottom:4px}
+@media print{.hlp-btn,.hlp-ov{display:none !important}}
+</style>
+<button class="hlp-btn" type="button" onclick="hlpOpen()">❓ 사용법</button>
+<div class="hlp-ov" id="hlpOv"><div class="hlp-box">
+<button class="hlp-x" type="button" onclick="hlpClose()" aria-label="닫기">✕</button>
+<h2>🔤 영어 소리코드 사용법</h2>
+<p class="hlp-lead">알파벳이 어떤 소리를 내는지 <b>순서대로</b> 익히면, 처음 보는 단어도 읽어낼 수 있어요.</p>
+
+<h3>1. 가장 중요한 건 순서예요</h3>
+<p>욕심내서 한 번에 다 하지 마세요. <b>1단계부터 차례대로</b>, 하루 10분이면 충분해요.</p>
+<ul>
+  <li><b>1단계 자음 소리</b> — 글자 하나에 소리 하나. 가장 기본이에요.</li>
+  <li><b>2단계 단모음</b> — a e i o u. 여기서 영어 읽기의 팔 할이 결정돼요.</li>
+  <li><b>3단계 이중자음</b> — sh, ch, th처럼 두 글자가 만나 새 소리 하나가 돼요.</li>
+  <li><b>4단계 자음군</b> — bl, cr, st처럼 두 소리가 섞이지 않고 나란히 이어져요.</li>
+  <li><b>5단계 매직 이</b> — 끝의 e가 앞 모음을 알파벳 이름 소리로 바꿔요. (cap → cape)</li>
+</ul>
+
+<h3>2. 카드를 누르면 소리가 나와요</h3>
+<ul>
+  <li>글자 카드를 누르면 <b>그 소리를 들려줘요.</b></li>
+  <li>아이가 <b>직접 누르고 따라 말하게</b> 해 주세요. 듣기만 하는 것보다 훨씬 잘 붙어요.</li>
+  <li>단계마다 <b>연습 단어</b>가 같이 있어요. 소리를 배운 다음 바로 읽어보면 좋아요.</li>
+</ul>
+
+<h3>3. 이렇게 해보세요 (하루 10분)</h3>
+<ul>
+  <li>오늘 할 단계의 카드를 <b>쭉 한 번 눌러가며</b> 따라 말해요. (5분)</li>
+  <li>그 단계의 <b>연습 단어</b>를 소리 내어 읽어봐요. (5분)</li>
+  <li>다음 날은 <b>앞 단계를 한 번 복습</b>하고 새 단계로 넘어가요.</li>
+</ul>
+<p>한 단계에 며칠씩 머물러도 괜찮아요. 아이가 편해질 때까지요.</p>
+
+<div class="hlp-tip">
+  <b>알아두면 좋아요</b><br>
+  · 소리가 안 나면 → 화면을 한 번 톡 누른 뒤 카드를 다시 눌러 주세요. 폰 무음도 풀어 주세요.<br>
+  · 위쪽 <b>1~5 동그라미</b>를 누르면 그 단계로 바로 이동해요.<br>
+  · 단어를 외우게 하지 마세요. <b>소리 규칙</b>만 익히면 단어는 저절로 읽혀요.
+</div>
+
+</div></div>
+<script>
+function hlpOpen(){document.getElementById('hlpOv').classList.add('on');}
+function hlpClose(){document.getElementById('hlpOv').classList.remove('on');}
+document.getElementById('hlpOv').addEventListener('click',function(e){
+  if(e.target===this) hlpClose();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape') hlpClose();});
+</script>
+<!--HELP_MODAL_END-->
