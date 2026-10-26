@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>소리 합치기 · 단모음</title>
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="theme-color" content="#fff6fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Quicksand:wght@600;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff6fa; --bg-2:#ffeef7; --surface:#fff; --line:#ffd6e8; --ink:#4a2140; --ink-soft:#9c6d8c;
+    --accent:#ff6fa0; --accent-deep:#e14c82; --accent-soft:#ffd6e8; --gold:#ffc94d; --gold-soft:#fff0d1;
+    --mint:#3fb58f; --mint-soft:#dcf5ea; --red:#e0533f;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:var(--bg);background-image:radial-gradient(ellipse 900px 500px at 15% -5%,var(--bg-2),transparent 60%);
+       color:var(--ink);font-family:'Gowun Dodum','Apple SD Gothic Neo',sans-serif;padding:12px 14px 60px;min-height:100vh;}
+  .wrap{max-width:720px;margin:0 auto;}
+  .en{font-family:'Quicksand',sans-serif;font-weight:700;}
+  .top{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .top h1{flex:1;margin:0;font-family:'Jua',sans-serif;font-weight:400;font-size:24px;color:var(--accent-deep);}
+  .icon-btn{background:#fff;border:2px solid var(--line);border-radius:14px;min-width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+            color:var(--accent-deep);text-decoration:none;font-size:18px;}
+  .stars{font-family:'Jua',sans-serif;font-size:18px;color:var(--gold-deep,#d99a1f);}
+  .card{background:var(--surface);border:2px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 14px 32px -16px rgba(225,76,130,.35);}
+  .hide{display:none!important;}
+  .tabs{display:flex;gap:6px;margin-bottom:10px;}
+  .tabs button{flex:1;border:2px solid var(--line);background:#fff;border-radius:16px;padding:8px 2px;font:inherit;cursor:pointer;color:var(--ink);}
+  .tabs button b{display:block;font-family:'Quicksand',sans-serif;font-size:24px;line-height:1.1;}
+  .tabs button small{font-size:13px;color:var(--ink-soft);}
+  .tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .tabs button.on small{color:#fff;}
+  .modes{display:flex;gap:6px;margin-bottom:14px;}
+  .modes button{flex:1;border:none;border-radius:14px;padding:10px;font-family:'Jua',sans-serif;font-size:18px;cursor:pointer;background:var(--accent-soft);color:var(--accent-deep);}
+  .modes button.on{background:var(--accent-deep);color:#fff;}
+
+  .fams{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:12px;}
+  .fams button{border:2px solid var(--line);background:#fff;border-radius:99px;padding:4px 14px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:20px;cursor:pointer;color:var(--ink);}
+  .fams button.on{border-color:var(--accent-deep);background:var(--accent-soft);}
+  .builder{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 4px;}
+  .tile{border:none;border-radius:18px;width:84px;height:96px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:56px;cursor:pointer;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;}
+  .tile small{font-family:'Jua',sans-serif;font-size:20px;margin-top:4px;opacity:.85;}
+  .tile.c{background:#e6effc;color:#3a6fc2;box-shadow:0 5px 0 #b9cdec;}
+  .tile.v{background:var(--accent-soft);color:var(--accent-deep);box-shadow:0 5px 0 #f3b3cf;}
+  .tile.k{background:#e6effc;color:#3a6fc2;box-shadow:0 5px 0 #b9cdec;}
+  .tile:active{transform:translateY(3px);}
+  .plus{font-size:26px;color:var(--ink-soft);}
+  .onsets{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 4px;}
+  .onsets button{border:2px solid #b9cdec;background:#fff;border-radius:12px;width:46px;height:46px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:24px;cursor:pointer;color:#3a6fc2;}
+  .onsets button.on{background:#3a6fc2;color:#fff;border-color:#3a6fc2;}
+  .onsets button.done{border-color:var(--mint);}
+  .hint{text-align:center;color:var(--ink-soft);font-size:15px;margin:2px 0;}
+  .go{display:block;margin:14px auto 0;border:none;border-radius:18px;background:var(--accent-deep);color:#fff;font-family:'Jua',sans-serif;font-size:22px;padding:12px 26px;cursor:pointer;box-shadow:0 5px 0 #b8386a;}
+  .go:active{transform:translateY(3px);box-shadow:0 2px 0 #b8386a;}
+  .result{text-align:center;min-height:120px;margin-top:14px;}
+  .result .em{font-size:52px;line-height:1.1;}
+  .result .w{font-family:'Quicksand',sans-serif;font-weight:700;font-size:48px;line-height:1.1;}
+  .result .w em{font-style:normal;color:var(--accent-deep);}
+  .result .ko{font-family:'Jua',sans-serif;font-size:22px;color:var(--ink-soft);}
+  .result .ko b{color:var(--ink);font-weight:400;font-size:28px;}
+
+  .q-listen{display:block;margin:6px auto 14px;border:none;border-radius:50%;width:104px;height:104px;font-size:46px;cursor:pointer;background:var(--accent-soft);box-shadow:0 5px 0 #f3b3cf;}
+  .q-listen:active{transform:translateY(3px);}
+  .q-text{text-align:center;font-family:'Jua',sans-serif;font-size:20px;margin:0 0 6px;}
+  .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .opt{border:2px solid var(--line);border-radius:18px;background:#fff;padding:16px 4px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:34px;cursor:pointer;color:var(--ink);}
+  .opt em{font-style:normal;color:var(--accent-deep);}
+  .opt.ok{background:var(--mint-soft);border-color:var(--mint);}
+  .opt.no{opacity:.4;}
+  .fb{min-height:64px;text-align:center;font-size:18px;margin-top:12px;line-height:1.5;}
+  .fb .good{color:var(--mint);font-family:'Jua',sans-serif;font-size:21px;}
+  .bar{height:10px;border-radius:99px;background:var(--accent-soft);overflow:hidden;margin-bottom:10px;}
+  .bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .3s;}
+  .speaking{filter:brightness(1.08);outline:3px solid var(--gold);}
+  .links{text-align:center;margin-top:14px;font-size:14px;color:var(--ink-soft);}
+  .links a{color:var(--accent-deep);}
+  @media (max-width:420px){ .tile{width:70px;height:84px;font-size:46px;} .opt{font-size:28px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="icon-btn" href="index.html#step-2" aria-label="파닉스 로드맵으로">◀</a>
+    <h1>🧩 소리 합치기</h1>
+    <span class="stars" id="stars"></span>
+  </div>
+  <div class="tabs" id="vowels"></div>
+  <div class="modes">
+    <button data-m="build" class="on">🧩 합치기</button>
+    <button data-m="quiz">👂 듣고 고르기</button>
+  </div>
+
+  <section class="card" id="v-build">
+    <div class="fams" id="fams"></div>
+    <div class="builder">
+      <button class="tile c" id="t-c"></button><span class="plus">+</span>
+      <button class="tile v" id="t-v"></button><span class="plus">+</span>
+      <button class="tile k" id="t-k"></button>
+    </div>
+    <p class="hint">글자 카드를 누르면 소리 하나씩 들려요</p>
+    <div class="onsets" id="onsets"></div>
+    <p class="hint">첫소리를 바꿔 봐요 👆</p>
+    <button class="go" id="blend">🔊 천천히 합치기</button>
+    <div class="result" id="result"></div>
+  </section>
+
+  <section class="card hide" id="v-quiz">
+    <div class="bar"><i id="q-bar"></i></div>
+    <p class="q-text">잘 듣고 맞는 단어를 골라요</p>
+    <button class="q-listen" id="q-listen" aria-label="다시 듣기">🔊</button>
+    <div class="opts" id="opts"></div>
+    <div class="fb" id="q-fb"></div>
+    <button class="go hide" id="q-next">다음 ▶</button>
+  </section>
+
+  <div class="links"><a href="print.html">🖨️ 종이 활용지 뽑기</a> · <a href="sight.html">📖 사이트워드 읽기</a></div>
+</div>
+
+<script src="sound.js"></script>
+<script src="phonics-data.js"></script>
+<script>
+var $ = function (id) { return document.getElementById(id); };
+var STORE = 'phonics-blend-v1';
+var st = {};
+try { st = JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) {}
+st.stars = st.stars || 0;
+function save() { try { localStorage.setItem(STORE, JSON.stringify(st)); } catch (e) {} }
+function showStars() { $('stars').textContent = '⭐ ' + st.stars; }
+function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function mark(w) { return w[0] + '<em>' + w[1] + '</em>' + w[2]; }
+
+var vowel = 'a', fam = 0, onset = null, mode = 'build', heard = {};
+
+// ── 모음 고르기 ──
+$('vowels').innerHTML = VOWELS.map(function (v) {
+  return '<button data-v="' + v + '"><b>' + v + '</b><small>' + VOWEL_KO[v] + '</small></button>';
+}).join('');
+document.querySelectorAll('#vowels button').forEach(function (b) {
+  b.onclick = function () { vowel = b.dataset.v; fam = 0; onset = null; render(); Sound.seq([{ type: 'ph', key: vowel }]); };
+});
+document.querySelectorAll('.modes button').forEach(function (b) {
+  b.onclick = function () {
+    mode = b.dataset.m;
+    document.querySelectorAll('.modes button').forEach(function (x) { x.classList.toggle('on', x === b); });
+    render();
+  };
+});
+
+// ── 합치기 ──
+function render() {
+  document.querySelectorAll('#vowels button').forEach(function (b) { b.classList.toggle('on', b.dataset.v === vowel); });
+  $('v-build').classList.toggle('hide', mode !== 'build');
+  $('v-quiz').classList.toggle('hide', mode !== 'quiz');
+  if (mode === 'quiz') { startQuiz(); return; }
+  var fs = FAMILIES[vowel];
+  $('fams').innerHTML = fs.map(function (f, i) {
+    return '<button data-i="' + i + '" class="' + (i === fam ? 'on' : '') + '">-' + f[0] + '</button>';
+  }).join('');
+  document.querySelectorAll('#fams button').forEach(function (b) {
+    b.onclick = function () { fam = +b.dataset.i; onset = null; render(); };
+  });
+  var f = fs[fam];
+  if (!onset) onset = f[1][0];
+  var w = onset + f[0];
+  $('t-c').innerHTML = onset + '<small>' + KO_ONSET[onset] + '</small>';
+  $('t-v').innerHTML = w[1] + '<small>' + KO_VOWEL[w[1]] + '</small>';
+  $('t-k').innerHTML = w[2] + '<small>' + KO_CODA[w[2]] + '</small>';
+  $('onsets').innerHTML = f[1].split('').map(function (c) {
+    return '<button data-c="' + c + '" class="' + (c === onset ? 'on ' : '') + (heard[c + f[0]] ? 'done' : '') + '">' + c + '</button>';
+  }).join('');
+  document.querySelectorAll('#onsets button').forEach(function (b) {
+    b.onclick = function () { onset = b.dataset.c; $('result').innerHTML = ''; render(); Sound.seq([{ type: 'ph', key: onset }]); };
+  });
+  $('result').dataset.w === w || ($('result').innerHTML = '');
+}
+$('t-c').onclick = function () { Sound.seq([{ type: 'ph', key: onset }], this); };
+$('t-v').onclick = function () { Sound.seq([{ type: 'ph', key: vowel }], this); };
+$('t-k').onclick = function () { Sound.seq([{ type: 'ph', key: FAMILIES[vowel][fam][0][1] }], this); };
+$('blend').onclick = function () {
+  var w = onset + FAMILIES[vowel][fam][0];
+  var tiles = [$('t-c'), $('t-v'), $('t-k')];
+  $('result').innerHTML = '';
+  // 소리를 하나씩 → 단어 전체
+  var items = [{ type: 'ph', key: w[0] }, { type: 'ph', key: w[1] }, { type: 'ph', key: w[2] }, { type: 'word', key: w }];
+  var i = 0;
+  (function next() {
+    tiles.forEach(function (t) { t.classList.remove('speaking'); });
+    if (i < 3) tiles[i].classList.add('speaking');
+    if (i === 3) showResult(w);
+    if (i >= items.length) return;
+    Sound.seq([items[i++]], null, next);
+  })();
+};
+function showResult(w) {
+  heard[w] = 1;
+  $('result').dataset.w = w;
+  $('result').innerHTML = (EMOJI[w] ? '<div class="em">' + EMOJI[w] + '</div>' : '') +
+    '<div class="w">' + mark(w) + '</div>' +
+    '<div class="ko">' + koParts(w) + ' → <b>' + koRead(w) + '</b></div>';
+  document.querySelectorAll('#onsets button').forEach(function (b) {
+    if (heard[b.dataset.c + FAMILIES[vowel][fam][0]]) b.classList.add('done');
+  });
+}
+
+// ── 듣고 고르기: 가운데 모음 소리를 듣고 고른다 ──
+var QN = 10, qs = [], qi = 0, qTry = 0, qDone = false, qScore = 0;
+function startQuiz() {
+  qs = shuffle(familyWords(vowel).filter(function (x) { return Sound.hasWord(x.w) || EMOJI[x.w]; })).slice(0, QN);
+  if (qs.length < QN) qs = qs.concat(shuffle(familyWords(vowel)).filter(function (x) { return qs.indexOf(x) < 0; }).slice(0, QN - qs.length));
+  qi = 0; qScore = 0;
+  newQ();
+}
+function newQ() {
+  var w = qs[qi].w;
+  qTry = 0; qDone = false;
+  $('q-bar').style.width = (qi / QN * 100) + '%';
+  var others = shuffle(VOWELS.filter(function (v) { return v !== vowel; })).slice(0, 2);
+  var opts = shuffle([w].concat(others.map(function (v) { return w[0] + v + w[2]; })));
+  $('opts').innerHTML = opts.map(function (o) { return '<button class="opt" data-w="' + o + '">' + mark(o) + '</button>'; }).join('');
+  document.querySelectorAll('#opts .opt').forEach(function (b) { b.onclick = function () { pick(b); }; });
+  $('q-fb').innerHTML = '';
+  $('q-next').classList.add('hide');
+  setTimeout(function () { Sound.seq([{ type: 'word', key: w }], $('q-listen')); }, 200);
+}
+$('q-listen').onclick = function () { Sound.seq([{ type: 'word', key: qs[qi].w }], this); };
+function pick(b) {
+  if (qDone) return;
+  var w = qs[qi].w;
+  if (b.dataset.w === w) {
+    qDone = true;
+    if (qTry === 0) { qScore++; st.stars++; save(); showStars(); }
+    b.classList.add('ok');
+    $('q-fb').innerHTML = '<span class="good">딩동댕! 🎉</span><br>' + (EMOJI[w] ? EMOJI[w] + ' ' : '') +
+      '<span class="en">' + w + '</span> · ' + koParts(w) + ' → <b>' + koRead(w) + '</b>';
+    $('q-next').classList.remove('hide');
+    $('q-next').textContent = qi === QN - 1 ? '끝! 결과 보기 ▶' : '다음 ▶';
+  } else {
+    qTry++;
+    b.classList.add('no');
+    $('q-fb').innerHTML = '가운데 소리를 잘 들어 봐요! 💡 <span class="en">' + vowel + '</span> = ' + VOWEL_KO[vowel] +
+      ' 소리예요. <span style="color:var(--ink-soft)">(🔊 다시 듣기)</span>';
+    Sound.seq([{ type: 'ph', key: vowel }, { type: 'word', key: w }]);
+  }
+}
+$('q-next').onclick = function () {
+  qi++;
+  if (qi < QN) { newQ(); return; }
+  $('opts').innerHTML = '';
+  $('q-bar').style.width = '100%';
+  $('q-fb').innerHTML = '<div style="font-size:60px">' + (qScore === QN ? '🏆' : qScore >= 7 ? '🥳' : '💪') + '</div>' +
+    '<span class="good">' + QN + '문제 중 ' + qScore + '개를 한 번에 맞혔어요!</span>';
+  $('q-next').textContent = '한 번 더 하기';
+  $('q-next').onclick = function () { $('q-next').onclick = nextHandler; startQuiz(); };
+};
+var nextHandler = $('q-next').onclick;
+
+showStars();
+render();
+</script>
+</body>
+</html>
