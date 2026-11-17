@@ -111,6 +111,8 @@
     st:"20260725_003511_88a20cbe-5ad5-404f-8e6c-f7f025c4b139",
     sw:"20260725_003515_a54d77aa-1259-43e4-94a8-9d1e76ad8ae0"
   };
+  // ph makes the same sound as f, so reuse the f recording.
+  PH_FILES.ph = PH_FILES.f;
   var realAudio = new Audio();
 
   var koVoice = null;
@@ -122,7 +124,9 @@
     br: '브르', cr: '크르', dr: '드르', fr: '프르', gr: '그르', pr: '프르', tr: '트르',
     sc: '스크', sk: '스크', sm: '스므', sn: '스느', sp: '스프', st: '스트', sw: '스워',
     tw: '트워',
-    scr: '스크르', spl: '스플', spr: '스프르', squ: '스쿼', str: '스트르', thr: '뜨르', shr: '쉬르'
+    scr: '스크르', spl: '스플', spr: '스프르', squ: '스쿼', str: '스트르', thr: '뜨르', shr: '쉬르',
+    mp: '음프', nd: '은드', nt: '은트', nk: '응크',
+    ind: '아인드', al: '어', ol: '오올', wr: '르', kn: '느'
   };
 
   function pickVoice() {
